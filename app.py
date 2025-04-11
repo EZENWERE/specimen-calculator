@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template_string
 import sqlite3
+import os
 
 app = Flask(__name__)
 
@@ -47,4 +48,5 @@ def index():
     return render_template_string(html, result=result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Get the port from the environment variable (default to 5000)
+    app.run(host="0.0.0.0", port=port, debug=True)  # Bind to 0.0.0.0 to make it accessible externally
